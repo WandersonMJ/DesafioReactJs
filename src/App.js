@@ -9,7 +9,7 @@ function App() {
 
   useEffect(()=>{
     api.get(`/repositories`).then(response => {
-      setRepositories(response.data.results);
+      setRepositories(response.data);
     });
   },[])
 
@@ -19,7 +19,7 @@ function App() {
       url: "https://github.com/WandersonMJ",
       techs: ["NodeJs", "React Native", "ReactJs"]
     });
-    setRepositories([...repositories, response.data.repository]);
+    setRepositories([...repositories, response.data]);
   }
 
   async function handleRemoveRepository(id) {
@@ -33,15 +33,13 @@ function App() {
     <div>
       <ul data-testid="repository-list">
        {repositories.map(repository=>(
-         <>
-        <li key={repository.id}>
-          {repository.title}
+          <li key={repository.id}>
+            {repository.title}
 
-          <button onClick={() => handleRemoveRepository(repository.id)}>
-            Remover
-          </button>
-        </li>
-        </>
+            <button onClick={() => handleRemoveRepository(repository.id)}>
+              Remover
+            </button>
+          </li>
       ))}
       </ul>
 
